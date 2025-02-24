@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const a = document.getElementById("album-art");
   const ab = document.getElementById("album-art-container");
   const c = document.getElementById("controls");
+  const b = document.getElementById("bottom-controls");
   const play = document.getElementById("play");
   const volUp = document.getElementById("volup");
   const volDown = document.getElementById("voldown");
@@ -29,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     q.style.width = "100%";
     q.style.paddingRight = "0";
     ab.style.height = "200px";
+    b.style.height = "100px";
     c.style.margin = "unset";
     q.querySelectorAll("li").forEach(li => li.style.width = "100%");
     log.style.display = "block";
