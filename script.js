@@ -13,7 +13,39 @@ document.addEventListener("DOMContentLoaded", function () {
   const next = document.getElementById("next");
   const prev = document.getElementById("prev");
   const shuffle = document.getElementById("shuffle");
+  const sidebar = document.getElementById("sidebar");
   const q = document.getElementById("queue");
+  const log = document.getElementById("nav-logo");
+
+
+  function isMobile() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  if (isMobile()) {
+    sidebar.style.width = "100%";
+    q.style.width = "100%";
+    q.style.paddingRight = "0";
+    q.querySelectorAll("li").forEach(li => li.style.width = "100%");
+    log.style.display = "block";
+    log.style.left = "unset";
+    function debounce(func, wait) {
+      let timeout;
+      return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+      };
+    }
+
+    log.addEventListener("click", debounce(function () {
+      if (sidebar.style.display === "none" || sidebar.style.display === "") {
+        sidebar.style.display = "flex";
+      } else {
+        sidebar.style.display = "none";
+      }
+    }, 100));
+    }
+
   const progressRing = document.querySelector(".progress-ring-circle");
   const radius = progressRing.r.baseVal.value;
   const circumference = 2 * Math.PI * radius;
@@ -78,6 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const sortedAlbums = Object.keys(albums).sort();
       sortedAlbums.forEach((album) => {
       const albumHeader = document.createElement("h3");
+      albumHeader.style.backgroundColor = "#0e0e0e";
       albumHeader.textContent = album;
       q.appendChild(albumHeader);
   
