@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const t = document.getElementById("song-title");
   //hhehehe fart
   const a = document.getElementById("album-art");
+  const ab = document.getElementById("album-art-container");
+  const c = document.getElementById("controls");
   const play = document.getElementById("play");
   const volUp = document.getElementById("volup");
   const volDown = document.getElementById("voldown");
@@ -26,6 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
     sidebar.style.width = "100%";
     q.style.width = "100%";
     q.style.paddingRight = "0";
+    ab.style.height = "200px";
+    c.style.margin = "unset";
     q.querySelectorAll("li").forEach(li => li.style.width = "100%");
     log.style.display = "block";
     log.style.left = "unset";
