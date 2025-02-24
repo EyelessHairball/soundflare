@@ -7,6 +7,9 @@
   font-family: Arial, sans-serif;
 }
 
+html,body,ul {
+  background: #0e0e0e !important;
+}
 .marquee-container {
   position: relative;
   width: 100%;
@@ -342,4 +345,17 @@ h3 {
   padding:20px;
   text-align:center;
   background: #0e0e0e;
+}
+
+.queue-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 10px 15px; 
 }
