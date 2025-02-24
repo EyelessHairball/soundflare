@@ -1,0 +1,93 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>SoundFlare</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+
+
+<link rel="icon" type="image/x-icon" href="soundflare.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoundFlare</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://unpkg.com/jsmediatags@3.9.7/dist/jsmediatags.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/discord-rpc@4.0.1/browser.min.js"></script>
+  <ul id="queue"></ul>
+  <nav class="navbar">
+    <a href="#" class="nav-logo">
+      <img src="https://i.ibb.co/ynbw0LqN/Sound-Flare.png" alt="SoundFlare Logo">
+    </a>
+    <!--<a class="link" style="border-bottom-color: red;">Popular</a>
+    <a class="link" style="border-bottom-color: rgb(4, 255, 0);">Library</a>
+    <a class="link" style="border-bottom-color: yellow;">Music</a>
+    <a class="link" style="border-bottom-color: blue;">Community</a> -->
+
+  </nav>
+  <div id="volume">
+  </div>
+  <div class="sidebar">
+    <div class="album-art">
+      <img src="./noart.png" alt="Album Art" id = "album-art">
+    </div>
+    <div class="song-info">
+      <h2 class="song-title" id = "song-title">Empty</h2>
+      <p class="artist-name" id = "artist-name">Upload your music directory and get started! :3</p>
+    </div>
+    <div class="controls">
+      <svg class="progress-ring" viewBox="0 0 220 220">
+        <defs>
+          <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ff0000"/>
+            <stop offset="100%" stop-color="#FF6A00"/>
+          </linearGradient>
+        </defs>
+        <circle class="progress-ring-circle" stroke="url(#progressGradient)" fill="transparent" cx="110" cy="110" r="108" stroke-width="4"/>
+      </svg>
+      <button class="control-button" id="prev">
+        <i class="fas fa-backward"></i>
+      </button>
+      <button class="control-button play-button" id="play">
+        <i class="fas fa-play"></i>
+      </button>
+      <button class="control-button plus" id="volup">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+      <button class="control-button" id="next">
+        <i class="fas fa-forward"></i>
+      </button>
+      <button class="control-button minus" id="voldown">
+        <i class="fa-solid fa-minus"></i>
+      </button>
+     
+      
+    </div>
+
+  
+    <div class = "bottom-controls">
+      <button id="loop" class="control-button-bottom">
+        <i class="fas fa-redo"></i>
+      </button>
+
+      <label for="file-input" class="control-button-bottom" id="file-input-label">
+        <input type="file" id="file-input" webkitdirectory mozdirectory multiple hidden>
+        <i class="fa-solid fa-arrow-up"></i>
+      </label>
+
+
+        <button id="shuffle" class="control-button-bottom">
+          <i class="fas fa-random"></i>
+        </button>
+    </div>
+  </div>
+
+
+
+
+  <script src="./script.js"></script>
+
+
+
+</body></html>

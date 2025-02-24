@@ -1,0 +1,12 @@
+{
+    "name": "SoundFlare",
+    "description": "A music player with the customizability and features accesible to all.",
+    "version": "1",
+    "manifest_version": 2,
+    "app": {
+      "background": {
+        "scripts": ["background.js"]
+      }
+    },
+    "icons": { "16": "soundflare.ico", "128": "soundflare.ico" }
+  }
