@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   resolve({
                     url: url,
                     file: file,
-                    name: tag.tags.title || file.name,
+                    name: tag.tags.title || file.name.replace(/\.[^/.]+$/, ""), 
                     artist: tag.tags.artist || "Unknown Artist",
                     album: tag.tags.album || "Unknown Album",
                     picture: tag.tags.picture,
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   resolve({
                     url: url,
                     file: file,
-                    name: file.name,
+                    name: file.name.replace(/\.[^/.]+$/, ""),
                     artist: "Unknown Artist",
                     album: "Unknown Album",
                     picture: {
