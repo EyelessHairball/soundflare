@@ -1,6 +1,8 @@
 // Abandon hope all ye who enter here.
 
 document.addEventListener("DOMContentLoaded", function () {
+  const store = localStorage.getItem("editcontent");
+  const tpref = localStorage.getItem("localpref");
   const f = document.getElementById("file-input");
   const ar = document.getElementById("artist-name");
   const t = document.getElementById("song-title");
@@ -27,7 +29,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const csse = document.getElementById('css-editor');
   const acssb = document.getElementById('apply-css');
   const rcssb = document.getElementById('reset-css');
-  
+  const customStyle = document.createElement('style');
+  customStyle.id = 'custom-css';
+  if (tpref) {
+    s.href = tpref;
+  } else {
+    s.href = "./dark.css"
+  }
+  document.head.appendChild(customStyle);
+  csse.value = store;
+  document.getElementById('custom-css').textContent = store;
+
+  // dictionary
+
+
   sb2.addEventListener('click', () => {
     sbd.classList.toggle('show');
   });
@@ -49,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
   acssb.addEventListener('click', () => {
     document.getElementById('custom-css').textContent = csse.textContent;
+    localStorage.setItem("editcontent", csse.innerHTML);
   });
   
   rcssb.addEventListener('click', () => {
@@ -56,16 +72,15 @@ document.addEventListener("DOMContentLoaded", function () {
     csse.textContent = '';
   });
   
-  const customStyle = document.createElement('style');
-  customStyle.id = 'custom-css';
-  document.head.appendChild(customStyle);
 
 function toggleTheme() {
   if (s.href.includes('light')) {
     s.href = './dark.css';
     sb.innerHTML = '<i class="fas fa-moon"></i> Theme';
+    localStorage.setItem("localpref", "./dark.css");
   } else {
     s.href = 'light.css';
+    localStorage.setItem("localpref", "./light.css");
     sb.innerHTML = '<i class="fas fa-sun"></i> Theme';
   }
 }
@@ -285,6 +300,7 @@ function toggleTheme() {
     audio.src = track.url;
     t.textContent = track.name;
     ar.textContent = track.artist;
+    document.title = track.name;
 
     if (track.picture) {
       const base64String = arrayBufferToBase64(track.picture.data);
@@ -451,8 +467,10 @@ function toggleTheme() {
 
     if (isPlaying) {
       audio.play();
+      document.title = track.name;
     } else {
       audio.pause();
+      document.title = "SoundFlare";
     }
   });
 });
