@@ -96,6 +96,11 @@ ul h3 {
 }
 
 
+.settings-button i {
+  color: black !important;
+}
+
+
 
 #play:hover::before {
   opacity: 1 !important;
