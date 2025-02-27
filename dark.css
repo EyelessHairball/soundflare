@@ -1,8 +1,5 @@
 @import url("https://fonts.cdnfonts.com/css/mugen-value");
 
-* {
-  font-family: Arial, sans-serif;
-}
 
 html {
   background: #1a1a1a !important;
@@ -19,6 +16,10 @@ html {
 }
 
 .settings {
+  color: white !important;
+}
+
+.settings-button i {
   color: white !important;
 }
 
@@ -108,12 +109,12 @@ html {
   background-color: #272727;
 }
 
-.settings-button i {
-  color: white !important;
-}
-
-
 ul h3 {
   background: #0e0e0e;
   color: white;
+}
+
+
+#css-editor {
+  font-family: monospace !important;
 }
