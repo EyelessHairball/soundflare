@@ -1,0 +1,114 @@
+@import url("https://fonts.cdnfonts.com/css/mugen-value");
+
+* {
+  font-family: Arial, sans-serif;
+}
+
+html {
+  background: #1a1a1a !important;
+}
+
+.link {
+  color: #fff !important;
+  font-family: "MUGEN Value", sans-serif;
+}
+
+.navbar {
+  background: #1a1a1a;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.settings {
+  color: white !important;
+}
+
+.sidebar {
+  background: #2a2a2a;
+  color: white;
+}
+
+.album-art {
+  background: #444;
+}
+
+.album-art img {
+  background: black;
+}
+
+.artist-name {
+  color: #888;
+}
+
+.controls::before {
+  background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+  box-shadow: 5px 5px 10px #1a1a1a, -2px -2px 10px #3a3a3a;
+}
+
+
+.control-button i {
+  color: #ffffff !important;
+}
+
+.control-button-bottom i {
+  color: #ffffff !important;
+}
+
+#play::before {
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+}
+
+#loop.active i,
+#shuffle.active i {
+  color: #ff0000 !important;
+}
+
+.bottom-controls {
+  background: #1a1a1a;
+}
+
+#play {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.329);
+}
+
+#play::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+#play:hover::before {
+  opacity: 0;
+}
+
+.marquee-container::before {
+  background: linear-gradient(to right, transparent 20%, transparent 100%);
+}
+
+.marquee-container::after {
+  background: linear-gradient(to left, transparent 20%, transparent 100%);
+}
+
+#queue {
+  background: #0e0e0e;
+}
+
+#queue li {
+  background-color: #0F0B0C;
+  border: 1px solid #000;
+  box-shadow: inset 0px 0px 0px 2px rgba(255,255,255,0.03);
+  color:white;
+}
+
+#queue li:hover {
+  background-color: #272727;
+}
+
+ul h3 {
+  background: #0e0e0e;
+  color: white;
+}
