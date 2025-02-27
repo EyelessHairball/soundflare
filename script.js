@@ -19,7 +19,58 @@ document.addEventListener("DOMContentLoaded", function () {
   const sidebar = document.getElementById("sidebar");
   const q = document.getElementById("queue");
   const log = document.getElementById("nav-logo");
+  const s = document.getElementById("theme-css");
+  const sb = document.getElementById("theme");
+  const sb2 = document.querySelector('.settings-button');
+  const sbd = document.querySelector('.settings-dropdown');
+  const cssm = document.getElementById('css-modal');
+  const csse = document.getElementById('css-editor');
+  const acssb = document.getElementById('apply-css');
+  const rcssb = document.getElementById('reset-css');
+  
+  sb2.addEventListener('click', () => {
+    sbd.classList.toggle('show');
+  });
+  
+  document.addEventListener('click', (e) => {
+    if (!sb2.contains(e.target) && !sbd.contains(e.target)) {
+      sbd.classList.remove('show');
+    }
+  });
+  
+  document.getElementById('custom-css-btn').addEventListener('click', () => {
+    cssm.style.display = 'block';
+    csse.textContent = document.getElementById('custom-css').textContent;
+  });
+  
+  document.querySelector('.close').addEventListener('click', () => {
+    cssm.style.display = 'none';
+  });
+  
+  acssb.addEventListener('click', () => {
+    document.getElementById('custom-css').textContent = csse.textContent;
+  });
+  
+  rcssb.addEventListener('click', () => {
+    document.getElementById('custom-css').textContent = '';
+    csse.textContent = '';
+  });
+  
+  const customStyle = document.createElement('style');
+  customStyle.id = 'custom-css';
+  document.head.appendChild(customStyle);
 
+function toggleTheme() {
+  if (s.href.includes('light')) {
+    s.href = './dark.css';
+    sb.innerHTML = '<i class="fas fa-moon"></i> Theme';
+  } else {
+    s.href = 'light.css';
+    sb.innerHTML = '<i class="fas fa-sun"></i> Theme';
+  }
+}
+  
+  sb.addEventListener('click', toggleTheme);
 
   function isMobile() {
     return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
