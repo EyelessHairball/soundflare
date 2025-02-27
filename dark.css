@@ -108,6 +108,11 @@ html {
   background-color: #272727;
 }
 
+.settings-button i {
+  color: white !important;
+}
+
+
 ul h3 {
   background: #0e0e0e;
   color: white;
