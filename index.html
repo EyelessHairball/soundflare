@@ -1,7 +1,10 @@
+<!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="UTF-8">
   <title>SoundFlare</title>
   <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./dark.css" id = "theme-css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 </head>
 <body>
@@ -12,9 +15,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SoundFlare</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script src="https://unpkg.com/jsmediatags@3.9.7/dist/jsmediatags.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/discord-rpc@4.0.1/browser.min.js"></script>
   <ul id="queue"></ul>
   <nav class="navbar">
     <a href="#" class="nav-logo" id = "nav-logo">
@@ -24,7 +25,25 @@
     <a class="link" style="border-bottom-color: rgb(4, 255, 0);">Library</a>
     <a class="link" style="border-bottom-color: yellow;">Music</a>
     <a class="link" style="border-bottom-color: blue;">Community</a> -->
-    <button id = "qbutton" class="queue-button"></button>
+
+    <div class="settings-container">
+      <button class="settings-button"><i class="fas fa-cog"></i></button>
+      <div class="settings-dropdown">
+        <button id="theme" class="dropdown-item"><i class="fas fa-moon"></i> Theme</button>
+        <button class="dropdown-item" id="custom-css-btn"><i class="fas fa-paint-brush"></i> Custom CSS</button>
+
+      </div>
+    </div>
+    
+    <div id="css-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3 class = "csstitle">Custom CSS Editor</h3>
+        <div id="css-editor" contenteditable="true"></div>
+        <button id="apply-css">Apply</button>
+        <button id="reset-css">Reset</button>
+      </div>
+    </div>
   </nav>
   <div id="volume">
   </div>
@@ -87,7 +106,6 @@
 
 
   <script src="./script.js"></script>
-
 
 
 </body></html>
