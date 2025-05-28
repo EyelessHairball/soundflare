@@ -2,7 +2,7 @@
 
 
 html {
-  background: #1a1a1a !important;
+  background: #0e0e0e !important;
 }
 
 .link {
@@ -114,7 +114,35 @@ ul h3 {
   color: white;
 }
 
-
 #css-editor {
   font-family: monospace !important;
+}
+
+::-webkit-scrollbar {
+  height: 12px;
+  background-color: #1e1e1e;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #1e1e1e;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #3a3a3a;
+  border-radius: 6px;
+  border: 2px solid #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #4a4a4a;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: #1e1e1e;
+}
+
+/* For Firefox */
+* {
+  scrollbar-color: #3a3a3a #1e1e1e;
 }
