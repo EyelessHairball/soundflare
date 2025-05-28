@@ -1,111 +1,234 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="UTF-8">
-  <title>SoundFlare</title>
-  <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="" id = "theme-css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!DOCTYPE html>
+  <html lang="en"><head>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="" id = "theme-css">
+    <link rel="stylesheet" href="./theme.css" id="theme-css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/less" ></script>
+    <link rel="stylesheet/less" type="text/css" href="./lens.less" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="jquery.rsSliderLens.js"></script>
+    <link rel="stylesheet" href="rsSliderLens.less" type="text/css" />
+    <link rel="stylesheet" href="path/to/rsSliderLens.css">
+  </head>
+    <body>
+  <!-- partial:index.partial.html -->
+  <canvas id="visualizer" style="position: fixed; top: 0; left: 0; z-index: 5; display: none;"></canvas>
+  <link rel="icon" type="image/x-icon" href="./soundflare.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundFlare</title>
+    <script src="jsmediatags.min.js"></script>
+    <ul id="queue"></ul>
+    <nav class="navbar" id = "navbar">
+      <a href="#" class="nav-logo" id = "nav-logo">
+        <img src="./Sound-Flare.png" alt="SoundFlare Logo">
+      </a>
+         <!-- <a class="link" style="border-bottom-color: red;">Popular</a> 
+      <a class="link" style="border-bottom-color: rgb(4, 255, 0);">Library</a>
+      <a class="link" style="border-bottom-color: rgb(255, 0, 0);">Playlists</a>
+      <a class="link" style="border-bottom-color: blue;">Community</a> -->
 
-</head>
-<body>
-<!-- partial:index.partial.html -->
+      <div class="settings-container">
+        <button class="settings-button"><i class="fas fa-cog"></i></button>
+        <div class="settings-dropdown">
+          <button class="dropdown-item" id="load-playlist">
+            <i class="fas fa-folder-open"></i> Load Playlist
+          </button>
+          <button id="theme" class="dropdown-item"><i class="fas fa-moon"></i> Theme</button>
+
+          <button class="dropdown-item" id="custom-css-btn"><i class="fas fa-paint-brush"></i> Custom CSS</button>
+
+          <button class="dropdown-item" id="custom-js-btn"><i class="fa-solid fa-scroll"></i> Custom JS</button>
+
+          <button class="dropdown-item" id="playback-settings-btn">
+            <i class="fas fa-sliders-h"></i> Playback Settings
+          </button>
+
+          <button class="dropdown-item" id="clear-cache">
+            <i class="fas fa-trash"></i> Clear Cache   
+          </button>
 
 
-<link rel="icon" type="image/x-icon" href="soundflare.ico">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SoundFlare</title>
-  <script src="https://unpkg.com/jsmediatags@3.9.7/dist/jsmediatags.min.js"></script>
-  <ul id="queue"></ul>
-  <nav class="navbar">
-    <a href="#" class="nav-logo" id = "nav-logo">
-      <img src="https://i.ibb.co/ynbw0LqN/Sound-Flare.png" alt="SoundFlare Logo">
-    </a>
-    <!--<a class="link" style="border-bottom-color: red;">Popular</a>
-    <a class="link" style="border-bottom-color: rgb(4, 255, 0);">Library</a>
-    <a class="link" style="border-bottom-color: yellow;">Music</a>
-    <a class="link" style="border-bottom-color: blue;">Community</a> -->
+          <button class="dropdown-item hidden" id="toggle-miniplayer">
+            <i class="fas fa-window-restore"></i> Miniplayer
+          </button>
 
-    <div class="settings-container">
-      <button class="settings-button"><i class="fas fa-cog"></i></button>
-      <div class="settings-dropdown">
-        <button id="theme" class="dropdown-item"><i class="fas fa-moon"></i> Theme</button>
-        <button class="dropdown-item" id="custom-css-btn"><i class="fas fa-paint-brush"></i> Custom CSS</button>
 
+          <button class="dropdown-item" id="toggle-visualizer">
+            <i class="fas fa-wave-square"></i> Visualizer
+          </button>
+
+        </div>
+      </div>
+      
+      <div id="css-modal" class="modal">
+        <div class="modal-content">
+          <span class="close" id = "close-css">&times;</span>
+          <h3 class = "csstitle">Custom CSS</h3>
+          <div id="css-editor" contenteditable="true"></div>
+          <button id="apply-css">Apply</button>
+          <button id="reset-css">Reset</button>
+        </div>
+      </div>
+      
+      <div id="playlist-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="close-pl">&times;</span>
+    <h3 class="csstitle">Add to Playlist</h3>
+    <div class="playlist-options">
+      <div class="create-playlist">
+        <input type="text" id="playlist-name" placeholder="New playlist name">
+        <button id="save-playlist">Create</button>
+      </div>
+      <h4>Existing Playlists:</h4>
+      <div id="existing-playlists" class="existing-playlists"></div>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="playlist-upload" webkitdirectory mozdirectory multiple hidden>
+
+      <div id="playback-modal" class="modal">
+        <div class="modal-content">
+          <span class="close" id = "close-pb">&times;</span>
+          <h3 class="csstitle">Playback Settings</h3>
+          <div class="playback-settings">
+            <div class="setting-group">
+              <label>Playback Speed (0.1x - 2x):</label>
+              <input type="range" id="playback-speed" min="0.1" max="2" step="0.1" value="1" class = "slider2">
+              <span id="speed-value">1x</span>
+            </div>
+            
+           <!-- <div class="setting-group">
+              <label>
+                <input type="checkbox" id="reverse-audio"> Reverse Audio
+              </label>
+            </div> -->
+      
+              <div class="setting-group">
+              <label>
+              <input type="checkbox" id="mono-audio"> Mono Audio
+              </label>
+            </div> 
+      
+            <div class="setting-group">
+              <label>Bass (60Hz):</label>
+              <input type="range" id="bass-boost" min="0" max="20" value="0" step="1" class = "slider">
+              <span id="bass-value">0dB</span>
+            </div>
+      
+            <div class="setting-group">
+              <label>Mid (1.5kHz):</label>
+              <input type="range" id="mid-boost" min="0" max="20" value="0" step="1" class = "slider">
+              <span id="mid-value">0dB</span>
+            </div>
+      
+            <div class="setting-group">
+              <label>Treble (4kHz):</label>
+              <input type="range" id="treble-boost" min="0" max="20" value="0" step="1" class = "slider">
+              <span id="treble-value">0dB</span>
+            </div>
+          </div>
+
+          
+      
+            <div class="setting-group">
+              <label>Volume Normalization:</label>
+              <select id="volume-normalization">
+                <option value="none">None</option>
+                <option value="track">Per Track</option>
+                <option value="album">Per Album</option>
+              </select>
+            </div>
+            <button id="reset-playback" class = "hidden">Reset to Defaults</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="js-modal" class="modal">
+        <div class="modal-content">
+          <span class="close" id = "close-js">&times;</span>
+          <h3 class = "csstitle">Custom Javascript</h3>
+          <div id="js-editor" contenteditable="true"></div>
+          <button id="apply-js">Apply</button>
+          <button id="reset-js">Reset</button>
+        </div>
+      </div>
+    </nav>
+    <div id="volume">
+    </div>
+    <!-- <div class="left-sidebar" id="playlist-sidebar">
+      <div class="playlist-header">
+        <h2>Playlists</h2>
+        <button id="load-playlist" class="playlist-action-btn">
+          <i class="fas fa-folder-plus"></i> Load Playlist
+        </button>
+      </div>
+      <div id="playlist-list" class="playlist-list"></div>
+    </div> -->
+    <div class="sidebar" id = "sidebar">
+      <div class="album-art" id = "album-art-container">
+        <img src="./noart.png" alt="Album Art" id = "album-art">
+      </div>
+      <div class="song-info">
+        <h2 class="song-title" id = "song-title">Empty</h2>
+        <p class="artist-name" id = "artist-name">Upload your music directory and get started! :3</p>
+      </div>
+      <div class="controls" id = "controls">
+        <div class="time-popup">
+          <span class="current-time">0:00</span>
+          <span class="time-separator" style = "color: gray;"> / </span>
+          <span class="remaining-time">-0:00</span>
+        </div>
+        <svg class="progress-ring" viewBox="0 0 220 220">
+          <defs>
+            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ff0000"/>
+              <stop offset="100%" stop-color="#FF6A00"/>
+            </linearGradient>
+          </defs>
+          <circle class="progress-ring-circle" stroke="url(#progressGradient)" fill="transparent" cx="110" cy="110" r="108" stroke-width="4"/>
+        </svg>
+        <button class="control-button" id="prev">
+          <i class="fas fa-backward"></i>
+        </button>
+        <button class="control-button play-button" id="play">
+          <i class="fas fa-play"></i>
+        </button>
+        <button class="control-button plus" id="volup">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <button class="control-button" id="next">
+          <i class="fas fa-forward"></i>
+        </button>
+        <button class="control-button minus" id="voldown">
+          <i class="fa-solid fa-minus"></i>
+        </button>
+      
+        
+      </div>
+
+
+    
+      <div class = "bottom-controls" id = "bottom-controls">
+        <button id="loop" class="control-button-bottom">
+          <i class="fas fa-redo"></i>
+        </button>
+
+        <label for="file-input" class="control-button-bottom" id="file-input-label">
+          <input type="file" id="file-input" accept="audio/mp3, audio/mpeg, audio/*" webkitdirectory mozdirectory multiple hidden>
+          <i class="fa-solid fa-arrow-up"></i>
+        </label>
+
+
+          <button id="shuffle" class="control-button-bottom">
+            <i class="fas fa-random"></i>
+          </button>
       </div>
     </div>
     
-    <div id="css-modal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h3 class = "csstitle">Custom CSS</h3>
-        <div id="css-editor" contenteditable="true"></div>
-        <button id="apply-css">Apply</button>
-        <button id="reset-css">Reset</button>
-      </div>
-    </div>
-  </nav>
-  <div id="volume">
-  </div>
-  <div class="sidebar" id = "sidebar">
-    <div class="album-art" id = "album-art-container">
-      <img src="./noart.png" alt="Album Art" id = "album-art">
-    </div>
-    <div class="song-info">
-      <h2 class="song-title" id = "song-title">Empty</h2>
-      <p class="artist-name" id = "artist-name">Upload your music directory and get started! :3</p>
-    </div>
-    <div class="controls" id = "controls">
-      <svg class="progress-ring" viewBox="0 0 220 220">
-        <defs>
-          <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#ff0000"/>
-            <stop offset="100%" stop-color="#FF6A00"/>
-          </linearGradient>
-        </defs>
-        <circle class="progress-ring-circle" stroke="url(#progressGradient)" fill="transparent" cx="110" cy="110" r="108" stroke-width="4"/>
-      </svg>
-      <button class="control-button" id="prev">
-        <i class="fas fa-backward"></i>
-      </button>
-      <button class="control-button play-button" id="play">
-        <i class="fas fa-play"></i>
-      </button>
-      <button class="control-button plus" id="volup">
-        <i class="fa-solid fa-plus"></i>
-      </button>
-      <button class="control-button" id="next">
-        <i class="fas fa-forward"></i>
-      </button>
-      <button class="control-button minus" id="voldown">
-        <i class="fa-solid fa-minus"></i>
-      </button>
-     
-      
-    </div>
+    <script src="./script.js"></script>
+    <script src="./renderer.js"></script>
 
-  
-    <div class = "bottom-controls" id = "bottom-controls">
-      <button id="loop" class="control-button-bottom">
-        <i class="fas fa-redo"></i>
-      </button>
-
-      <label for="file-input" class="control-button-bottom" id="file-input-label">
-        <input type="file" id="file-input" accept="audio/mp3, audio/mpeg, audio/*" webkitdirectory mozdirectory multiple hidden>
-        <i class="fa-solid fa-arrow-up"></i>
-      </label>
-
-
-        <button id="shuffle" class="control-button-bottom">
-          <i class="fas fa-random"></i>
-        </button>
-    </div>
-  </div>
-
-
-
-
-  <script src="./script.js"></script>
-
-
-</body></html>
+  </body></html>
