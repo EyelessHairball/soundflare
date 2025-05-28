@@ -1,7 +1,6 @@
 // Abandon hope all ye who enter here.
 
 document.addEventListener("DOMContentLoaded", function () {
-    const { ipcRenderer } = require("electron");
     const store = localStorage.getItem("editcontent");
     const storesrc = localStorage.getItem("editcontentjs");
     const visualizerCanvas = document.getElementById("visualizer");
@@ -540,13 +539,6 @@ document.addEventListener("DOMContentLoaded", function () {
       t.textContent = track.name;
       ar.textContent = track.artist;
       document.title = track.name + " - " + track.artist;
-      
-      ipcRenderer.send("update-rpc", {
-              title: playlist[currentTrackIndex].name,
-              artist: playlist[currentTrackIndex].artist,
-              album: playlist[currentTrackIndex].album,
-              playing: true
-            });
 
       let artwork = [];
       if (track.picture) {
@@ -707,13 +699,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function setProgress(progress) {
       const offset = circumference - progress * circumference;
       progressRing.style.strokeDashoffset = offset;
-      ipcRenderer.send("update-rpc", {
-  title: playlist[currentTrackIndex].name,
-  artist: playlist[currentTrackIndex].artist,
-  album: playlist[currentTrackIndex].album,
-  playing: true,
-  position: Math.floor(audio.currentTime)
-});
     }
   
     function updateProgress() {
@@ -1019,21 +1004,9 @@ document.addEventListener('keydown', function(e) {
           if (playlist[currentTrackIndex]) {
             document.title = playlist[currentTrackIndex].name + " - " + playlist[currentTrackIndex].artist;
           }
-            ipcRenderer.send("update-rpc", {
-              title: playlist[currentTrackIndex].name,
-              artist: playlist[currentTrackIndex].artist,
-              album: playlist[currentTrackIndex].album,
-              playing: true
-            });
         } else {
           audio.pause();
           document.title = "SoundFlare";
-             ipcRenderer.send("update-rpc", {
-              title: currentTrack.name,
-               artist: currentTrack.artist,
-               album: currentTrack.album,
-               playing: false
-         });
         }
       });
     }    
