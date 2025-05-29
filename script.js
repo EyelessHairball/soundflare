@@ -60,22 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const originalConsole = {};
   const methodsToOverride = ['log', 'warn', 'error', 'info', 'debug', 'clear'];
 
-  const consoleOutput = document.getElementById('console-editor');
   console.logs = [];
-
-  function appendLogToUI(log) {
-    if (!consoleOutput) return;
-    const entry = document.createElement('div');
-    entry.className = `console-${log.method}`;
-    entry.textContent = `[${log.timestamp}] [${log.method.toUpperCase()}] ${log.args.join(' ')}`;
-    consoleOutput.appendChild(entry);
-    consoleOutput.scrollTop = consoleOutput.scrollHeight;
-  }
-
-  function renderAllLogs() {
-    consoleOutput.innerHTML = '';
-    console.logs.forEach(appendLogToUI);
-  }
 
   methodsToOverride.forEach(methodName => {
     if (typeof console[methodName] === 'function') {
@@ -84,15 +69,12 @@ document.addEventListener("DOMContentLoaded", function () {
       console[methodName] = function (...args) {
         if (methodName === 'clear') {
           console.logs = [];
-          renderAllLogs();
         } else {
-          const log = {
+          console.logs.push({
             method: methodName,
             args: args,
             timestamp: new Date().toLocaleTimeString()
-          };
-          console.logs.push(log);
-          appendLogToUI(log);
+          });
         }
 
         originalConsole[methodName].apply(console, args);
@@ -100,7 +82,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 })();
-
 
 
         let wakeLock = null;
@@ -312,11 +293,27 @@ const releaseWakeLock = () => {
       csse.textContent = document.getElementById('custom-css').textContent;
     });
 
-   document.getElementById('console').addEventListener('click', () => {
+ document.getElementById('console').addEventListener('click', () => {
   cm.style.display = 'block';
-  console.log("Console opened.");
+  ce.innerHTML = '';
+
+  console.logs.forEach(log => {
+    const entry = document.createElement('div');
+    entry.className = `console-${log.method}`;
+    entry.textContent = `[${log.timestamp}] [${log.method.toUpperCase()}] ${log.args.join(' ')}`;
+    ce.appendChild(entry);
+  });
+
+  ce.scrollTop = ce.scrollHeight;
+
+  console.log("Hello World!");
 });
 
+
+  ce.scrollTop = ce.scrollHeight;
+
+  console.log("Hello World!");
+});
 
 
     document.getElementById('custom-js-btn').addEventListener('click', () => {
