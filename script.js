@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const midBoost = document.getElementById('mid-boost');
     const trebleBoost = document.getElementById('treble-boost');
     const toggleMiniplayer = document.getElementById('toggle-miniplayer');
+    
     console.stdlog = console.log.bind(console);
     console.logs = [];
     console.log = function(){
@@ -241,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById('console').addEventListener('click', () => {
       cm.style.display = 'block';
-      ce.textContent = Arrays.toString(console.logs);
+      ce.textContent = console.logs.toString();
     });
 
     document.getElementById('custom-js-btn').addEventListener('click', () => {
