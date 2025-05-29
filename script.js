@@ -56,31 +56,33 @@ document.addEventListener("DOMContentLoaded", function () {
     const trebleBoost = document.getElementById('treble-boost');
     const toggleMiniplayer = document.getElementById('toggle-miniplayer');
     
-    (function() {
-    const originalConsole = {};
-    const methodsToOverride = ['log', 'warn', 'error', 'info', 'debug', 'table', 'clear'];
+   (function () {
+  const originalConsole = {};
+  const methodsToOverride = ['log', 'warn', 'error', 'info', 'debug', 'clear'];
 
-    console.logs = [];
+  console.logs = [];
 
-    methodsToOverride.forEach(methodName => {
-        if (typeof console[methodName] === 'function') {
-            originalConsole[methodName] = console[methodName].bind(console);
+  methodsToOverride.forEach(methodName => {
+    if (typeof console[methodName] === 'function') {
+      originalConsole[methodName] = console[methodName].bind(console);
 
-            console[methodName] = function() {
-                if (methodName === 'clear') {
-                    console.logs = [];
-                }
-
-                console.logs.push({
-                    method: methodName,
-                    args: Array.from(arguments),
-                    timestamp: new Date().toISOString()
-                });
-
-                originalConsole[methodName].apply(console, arguments);
-            };
+      console[methodName] = function (...args) {
+        if (methodName === 'clear') {
+          console.logs = [];
+        } else {
+          console.logs.push({
+            method: methodName,
+            args: args,
+            timestamp: new Date().toLocaleTimeString()
+          });
         }
-    });
+
+        originalConsole[methodName].apply(console, args);
+      };
+    }
+  });
+})();
+
 
         let wakeLock = null;
 
