@@ -503,7 +503,7 @@ h3 {
   backdrop-filter: blur(10px);
 }
 
-#css-editor, #js-editor {
+#css-editor, #js-editor, #console-editor {
   max-height: 100%;
   height: 300px;
   border: 1px solid #444;
