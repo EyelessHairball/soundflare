@@ -82,6 +82,30 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+        let wakeLock = null;
+
+const requestWakeLock = async () => {
+    try {
+        wakeLock = await navigator.wakeLock.request('screen');
+        console.log('Screen Wake Lock acquired!');
+        wakeLock.addEventListener('release', () => {
+            console.log('Screen Wake Lock released!');
+        });
+    } catch (err) {
+        console.error(`${err.name}, ${err.message}`);
+    }
+};
+
+const releaseWakeLock = () => {
+    if (wakeLock) {
+        wakeLock.release();
+        wakeLock = null;
+    }
+};
+
+// Call requestWakeLock when audio starts playing
+// Call releaseWakeLock when audio stops or pauses
+
     console.stdlog = originalConsole.log;
     console.stdwarn = originalConsole.warn;
     console.stderror = originalConsole.error;
