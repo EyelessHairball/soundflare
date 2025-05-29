@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const storesrc = localStorage.getItem("editcontentjs");
     const visualizerCanvas = document.getElementById("visualizer");
     const visualizerCtx = visualizerCanvas.getContext("2d");
-    const tpref = localStorage.getItem("localpref");
+    const tpref = localStorage.getItem("localpref"); // Ok
     const f = document.getElementById("file-input");
     const ar = document.getElementById("artist-name");
     const t = document.getElementById("song-title");
