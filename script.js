@@ -56,12 +56,40 @@ document.addEventListener("DOMContentLoaded", function () {
     const trebleBoost = document.getElementById('treble-boost');
     const toggleMiniplayer = document.getElementById('toggle-miniplayer');
     
-    console.stdlog = console.log.bind(console);
+    (function() {
+    const originalConsole = {};
+    const methodsToOverride = ['log', 'warn', 'error', 'info', 'debug', 'table', 'clear'];
+
     console.logs = [];
-    console.log = function(){
-        console.logs.push(Array.from(arguments));
-        console.stdlog.apply(console, arguments);
-    }
+
+    methodsToOverride.forEach(methodName => {
+        if (typeof console[methodName] === 'function') {
+            originalConsole[methodName] = console[methodName].bind(console);
+
+            console[methodName] = function() {
+                if (methodName === 'clear') {
+                    console.logs = [];
+                }
+
+                console.logs.push({
+                    method: methodName,
+                    args: Array.from(arguments),
+                    timestamp: new Date().toISOString()
+                });
+
+                originalConsole[methodName].apply(console, arguments);
+            };
+        }
+    });
+
+    console.stdlog = originalConsole.log;
+    console.stdwarn = originalConsole.warn;
+    console.stderror = originalConsole.error;
+    console.stdinfo = originalConsole.info;
+    console.stddebug = originalConsole.debug;
+    console.stdtable = originalConsole.table;
+    console.stdclear = originalConsole.clear;
+})();
 
     
     const audio = new Audio("");
