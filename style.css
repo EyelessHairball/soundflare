@@ -1011,3 +1011,10 @@ input[type="range"], .slider, .slider2 {
 .window-close:hover {
   background-color: var(--titlebar-close-hover-bg) !important;
 }
+
+.console-log { color: white; }
+.console-warn { color: orange; }
+.console-error { color: red; }
+.console-info { color: cyan; }
+.console-debug { color: lightgray; }
+
