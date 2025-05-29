@@ -126,7 +126,6 @@ const releaseWakeLock = () => {
 
 // Call requestWakeLock when audio starts playing
 // Call releaseWakeLock when audio stops or pauses
-// adding a comment cuz github wont update my shit otherwise
 
     console.stdlog = originalConsole.log;
     console.stdwarn = originalConsole.warn;
@@ -1086,22 +1085,23 @@ document.addEventListener('keydown', function(e) {
     audio.addEventListener("loadedmetadata", updateProgress);
     audio.addEventListener("loadedmetadata", checkOverflow);
     audio.addEventListener("timeupdate", updateProgress);
-      if (play) {
-        play.addEventListener("click", () => {
-          isPlaying = !isPlaying;
-          const playIcon = play.querySelector("i");
-          playIcon.classList.toggle("fa-pause");
-          playIcon.classList.toggle("fa-play");
-      
-          if (isPlaying) {
-            audio.play();
-            if (playlist[currentTrackIndex]) {
-              document.title = playlist[currentTrackIndex].name + " - " + playlist[currentTrackIndex].artist;
-            }
-          } else {
-            audio.pause();
-            document.title = "SoundFlare";
+    if (play) {
+      play.addEventListener("click", () => {
+        isPlaying = !isPlaying;
+        const playIcon = play.querySelector("i");
+        playIcon.classList.toggle("fa-pause");
+        playIcon.classList.toggle("fa-play");
+    
+        if (isPlaying) {
+          audio.play();
+          if (playlist[currentTrackIndex]) {
+            document.title = playlist[currentTrackIndex].name + " - " + playlist[currentTrackIndex].artist;
           }
-        });
-  }    
+        } else {
+          audio.pause();
+          document.title = "SoundFlare";
+        }
+      });
+    }    
+  });
  
