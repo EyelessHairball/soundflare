@@ -242,7 +242,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById('console').addEventListener('click', () => {
       cm.style.display = 'block';
-      ce.textContent = console.logs.toString();
+      ce.textContent = console.logs.toString(); //aiden was here!
+      console.log("Hello World!");
     });
 
     document.getElementById('custom-js-btn').addEventListener('click', () => {
