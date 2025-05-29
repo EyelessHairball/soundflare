@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const a = document.getElementById("album-art");
     const ab = document.getElementById("album-art-container");
     const c = document.getElementById("controls");
+    const cm = document.getElementById("console-modal");
+    const ce = document.getElementById("console-editor");
     const b = document.getElementById("bottom-controls");
     const play = document.getElementById("play");
     const volUp = document.getElementById("volup");
