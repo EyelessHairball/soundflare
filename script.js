@@ -1,11 +1,11 @@
 // Abandon hope all ye who enter here.
 
 document.addEventListener("DOMContentLoaded", function () {
-    const store = localStorage.getItem("editcontent"); 
+    const store = localStorage.getItem("editcontent");
     const storesrc = localStorage.getItem("editcontentjs");
     const visualizerCanvas = document.getElementById("visualizer");
     const visualizerCtx = visualizerCanvas.getContext("2d");
-    const tpref = localStorage.getItem("localpref"); // Ok
+    const tpref = localStorage.getItem("localpref");
     const f = document.getElementById("file-input");
     const ar = document.getElementById("artist-name");
     const t = document.getElementById("song-title");
@@ -13,8 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const a = document.getElementById("album-art");
     const ab = document.getElementById("album-art-container");
     const c = document.getElementById("controls");
-    const cm = document.getElementById("console-modal");
-    const ce = document.getElementById("console-editor");
     const b = document.getElementById("bottom-controls");
     const play = document.getElementById("play");
     const volUp = document.getElementById("volup");
@@ -55,67 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const midBoost = document.getElementById('mid-boost');
     const trebleBoost = document.getElementById('treble-boost');
     const toggleMiniplayer = document.getElementById('toggle-miniplayer');
-    
-   (function () {
-  const originalConsole = {};
-  const methodsToOverride = ['log', 'warn', 'error', 'info', 'debug', 'clear'];
-
-  console.logs = [];
-
-  methodsToOverride.forEach(methodName => {
-    if (typeof console[methodName] === 'function') {
-      originalConsole[methodName] = console[methodName].bind(console);
-
-      console[methodName] = function (...args) {
-        if (methodName === 'clear') {
-          console.logs = [];
-        } else {
-          console.logs.push({
-            method: methodName,
-            args: args,
-            timestamp: new Date().toLocaleTimeString()
-          });
-        }
-
-        originalConsole[methodName].apply(console, args);
-      };
-    }
-  });
-})();
-
-
-        let wakeLock = null;
-
-const requestWakeLock = async () => {
-    try {
-        wakeLock = await navigator.wakeLock.request('screen');
-        console.log('Screen Wake Lock acquired!');
-        wakeLock.addEventListener('release', () => {
-            console.log('Screen Wake Lock released!');
-        });
-    } catch (err) {
-        console.error(`${err.name}, ${err.message}`);
-    }
-};
-
-const releaseWakeLock = () => {
-    if (wakeLock) {
-        wakeLock.release();
-        wakeLock = null;
-    }
-};
-
-// Call requestWakeLock when audio starts playing
-// Call releaseWakeLock when audio stops or pauses
-
-    console.stdlog = originalConsole.log;
-    console.stdwarn = originalConsole.warn;
-    console.stderror = originalConsole.error;
-    console.stdinfo = originalConsole.info;
-    console.stddebug = originalConsole.debug;
-    console.stdtable = originalConsole.table;
-    console.stdclear = originalConsole.clear;
-})();
 
     
     const audio = new Audio("");
@@ -293,22 +230,6 @@ const releaseWakeLock = () => {
       csse.textContent = document.getElementById('custom-css').textContent;
     });
 
- document.getElementById('console').addEventListener('click', () => {
-  cm.style.display = 'block';
-  ce.innerHTML = ''; // ANOTHER COMMENT BECAUSE IT WONT UPDATE OTHERWISE FUCK YOU GITHUB
-
-  console.logs.forEach(log => {
-    const entry = document.createElement('div');
-    entry.className = `console-${log.method}`;
-    entry.textContent = `[${log.timestamp}] [${log.method.toUpperCase()}] ${log.args.join(' ')}`;
-    ce.appendChild(entry);
-  });
-
-  ce.scrollTop = ce.scrollHeight;
-  console.log("Hello World!");
-});
-
-
     document.getElementById('custom-js-btn').addEventListener('click', () => {
       jsm.style.display = 'block';
       jse.textContent = document.getElementById('custom-js').textContent;
@@ -316,10 +237,6 @@ const releaseWakeLock = () => {
     
     document.getElementById('close-css').addEventListener('click', () => {
       cssm.style.display = 'none';
-    });
-    
-     document.getElementById('close-console').addEventListener('click', () => {
-      cm.style.display = 'none';
     });
 
     document.getElementById('close-js').addEventListener('click', () => {
@@ -622,6 +539,8 @@ const releaseWakeLock = () => {
       t.textContent = track.name;
       ar.textContent = track.artist;
       document.title = track.name + " - " + track.artist;
+      
+
 
       let artwork = [];
       if (track.picture) {
@@ -1094,4 +1013,3 @@ document.addEventListener('keydown', function(e) {
       });
     }    
   });
- 
