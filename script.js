@@ -313,7 +313,7 @@ const releaseWakeLock = () => {
     });
 
    document.getElementById('console').addEventListener('click', () => {
-  document.getElementById('console-modal').style.display = 'block';
+  cm.style.display = 'block';
   console.log("Console opened.");
 });
 
