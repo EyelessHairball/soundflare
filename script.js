@@ -126,6 +126,7 @@ const releaseWakeLock = () => {
 
 // Call requestWakeLock when audio starts playing
 // Call releaseWakeLock when audio stops or pauses
+// adding a comment cuz github wont update my shit otherwise
 
     console.stdlog = originalConsole.log;
     console.stdwarn = originalConsole.warn;
