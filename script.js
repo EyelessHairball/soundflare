@@ -293,10 +293,20 @@ const releaseWakeLock = () => {
 
 
     document.getElementById('console').addEventListener('click', () => {
-      cm.style.display = 'block';
-      ce.textContent = console.logs.toString(); //aiden was here!
-      console.log("Hello World!");
-    });
+       cm.style.display = 'block';
+       ce.innerHTML = ''; 
+  console.logs.forEach(log => {
+    const entry = document.createElement('div');
+    entry.className = `console-${log.method}`;
+    entry.textContent = `[${log.timestamp}] [${log.method.toUpperCase()}] ${log.args.join(' ')}`;
+    ce.appendChild(entry);
+  });
+
+  ce.scrollTop = ce.scrollHeight;
+
+  console.log("Hello World!");
+});
+
 
     document.getElementById('custom-js-btn').addEventListener('click', () => {
       jsm.style.display = 'block';
