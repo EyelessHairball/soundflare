@@ -293,16 +293,22 @@ const releaseWakeLock = () => {
       csse.textContent = document.getElementById('custom-css').textContent;
     });
 
+ document.getElementById('console').addEventListener('click', () => {
+  cm.style.display = 'block';
+  ce.innerHTML = '';
 
-    document.getElementById('console').addEventListener('click', () => {
-       cm.style.display = 'block';
-       ce.innerHTML = ''; 
   console.logs.forEach(log => {
     const entry = document.createElement('div');
     entry.className = `console-${log.method}`;
     entry.textContent = `[${log.timestamp}] [${log.method.toUpperCase()}] ${log.args.join(' ')}`;
     ce.appendChild(entry);
   });
+
+  ce.scrollTop = ce.scrollHeight;
+
+  console.log("Hello World!");
+});
+
 
   ce.scrollTop = ce.scrollHeight;
 
