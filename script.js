@@ -53,6 +53,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const midBoost = document.getElementById('mid-boost');
     const trebleBoost = document.getElementById('treble-boost');
     const toggleMiniplayer = document.getElementById('toggle-miniplayer');
+    console.stdlog = console.log.bind(console);
+    console.logs = [];
+    console.log = function(){
+        console.logs.push(Array.from(arguments));
+        console.stdlog.apply(console, arguments);
+    }
 
     
     const audio = new Audio("");
@@ -228,6 +234,12 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('custom-css-btn').addEventListener('click', () => {
       cssm.style.display = 'block';
       csse.textContent = document.getElementById('custom-css').textContent;
+    });
+
+
+    document.getElementById('console').addEventListener('click', () => {
+      cm.style.display = 'block';
+      ce.textContent = Arrays.toString(console.logs);
     });
 
     document.getElementById('custom-js-btn').addEventListener('click', () => {
