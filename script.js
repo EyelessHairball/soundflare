@@ -1,7 +1,7 @@
 // Abandon hope all ye who enter here.
 
 document.addEventListener("DOMContentLoaded", function () {
-    const store = localStorage.getItem("editcontent");
+    const store = localStorage.getItem("editcontent"); 
     const storesrc = localStorage.getItem("editcontentjs");
     const visualizerCanvas = document.getElementById("visualizer");
     const visualizerCtx = visualizerCanvas.getContext("2d");
