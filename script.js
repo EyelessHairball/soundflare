@@ -295,7 +295,7 @@ const releaseWakeLock = () => {
 
  document.getElementById('console').addEventListener('click', () => {
   cm.style.display = 'block';
-  ce.innerHTML = '';
+  ce.innerHTML = ''; // ANOTHER COMMENT BECAUSE IT WONT UPDATE OTHERWISE FUCK YOU GITHUB
 
   console.logs.forEach(log => {
     const entry = document.createElement('div');
