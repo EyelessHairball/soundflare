@@ -159,35 +159,64 @@ document.addEventListener("DOMContentLoaded", function () {
     // dictionary
 
 
-    function initAudioContext() {
-      if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        gainNode = audioContext.createGain();
-        
-        bassBoostNode = audioContext.createBiquadFilter();
-        bassBoostNode.type = 'lowshelf';
-        bassBoostNode.frequency.value = 150;
     
-        midBoostNode = audioContext.createBiquadFilter();
-        midBoostNode.type = 'peaking';
-        midBoostNode.frequency.value = 1000;
-        midBoostNode.Q.value = 1;
-    
-        trebleBoostNode = audioContext.createBiquadFilter();
-        trebleBoostNode.type = 'highshelf';
-        trebleBoostNode.frequency.value = 3000;
-        
-        if (!mediaElementSource) {
-          mediaElementSource = audioContext.createMediaElementSource(audio);
-          mediaElementSource
-            .connect(bassBoostNode)
-            .connect(midBoostNode)
-            .connect(trebleBoostNode)
-            .connect(gainNode)
-            .connect(audioContext.destination);
-        }
-      }
+function initAudioContext() {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    gainNode = audioContext.createGain();
+
+    bassBoostNode = audioContext.createBiquadFilter();
+    bassBoostNode.type = 'lowshelf';
+    bassBoostNode.frequency.value = 150;
+
+    midBoostNode = audioContext.createBiquadFilter();
+    midBoostNode.type = 'peaking';
+    midBoostNode.frequency.value = 1000;
+    midBoostNode.Q.value = 1;
+
+    trebleBoostNode = audioContext.createBiquadFilter();
+    trebleBoostNode.type = 'highshelf';
+    trebleBoostNode.frequency.value = 3000;
+
+    if (!mediaElementSource) {
+      mediaElementSource = audioContext.createMediaElementSource(audio);
+      mediaElementSource
+        .connect(bassBoostNode)
+        .connect(midBoostNode)
+        .connect(trebleBoostNode)
+        .connect(gainNode)
+        .connect(audioContext.destination);
     }
+
+    // Hide the mobile prompt button if visible
+    const mobilePrompt = document.getElementById("mobilePrompt");
+    if (mobilePrompt) mobilePrompt.style.display = "none";
+  }
+}
+
+function isMobileDevice() {
+  return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+window.addEventListener("load", () => {
+  if (isMobileDevice()) {
+    const button = document.createElement("button");
+    button.innerText = "Tap to Enable Audio";
+    button.id = "mobilePrompt";
+    button.style = `
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      color: white; font-size: 24px; border: none;
+      display: flex; justify-content: center; align-items: center;
+      z-index: 9999;
+    `;
+    button.addEventListener("click", initAudioContext);
+    document.body.appendChild(button);
+  } else {
+    initAudioContext(); // Desktop can auto-init
+  }
+});
     
     // Initialize trebleBoostNode if not already initialized
     if (!audioContext) {
