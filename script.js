@@ -252,6 +252,10 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('close-css').addEventListener('click', () => {
       cssm.style.display = 'none';
     });
+    
+     document.getElementById('close-console').addEventListener('click', () => {
+      cm.style.display = 'none';
+    });
 
     document.getElementById('close-js').addEventListener('click', () => {
       jsm.style.display = 'none';
