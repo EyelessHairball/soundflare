@@ -1,0 +1,171 @@
+@import url("https://fonts.cdnfonts.com/css/mugen-value");
+
+
+html {
+  background: #0e0e0e !important;
+}
+
+.link {
+  color: #fff !important;
+  font-family: "MUGEN Value", sans-serif;
+}
+
+.navbar {
+  background: #1a1a1a;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.titlebar{
+    background: #202020;
+}
+
+#titleupdate {
+    color: grey;
+}
+
+.settings {
+  color: white !important;
+}
+
+.settings-button i {
+  color: white !important;
+}
+
+.playlist-button i {
+  color: white !important;
+}
+
+.sidebar {
+  background: #2a2a2a;
+  color: white;
+}
+
+.album-art {
+  background: #444;
+}
+
+.album-art img {
+  background: black;
+}
+
+.artist-name {
+  color: #888;
+}
+
+.controls::before {
+  background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+  box-shadow: 5px 5px 10px #1a1a1a, -2px -2px 10px #3a3a3a;
+}
+
+
+.control-button i {
+  color: #717171 !important;
+}
+
+.control-button-bottom i {
+  color: #717171 !important;
+}
+
+#loop.active i,
+#shuffle.active i,
+#trad-loop.active i,
+#trad-shuffle.active i {
+  color: #ffffff !important; 
+}
+
+.bottom-controls {
+  background: #1a1a1a;
+}
+
+
+#play::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #1f1f1f;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  z-index: 0;
+}
+
+#play i {
+  position: relative;
+  z-index: 1;
+  font-size: 1em;
+}
+
+#play:hover::before {
+  color: #717171 !important;
+}
+
+.marquee-container::before {
+  background: linear-gradient(to right, transparent 20%, transparent 100%);
+}
+
+.marquee-container::after {
+  background: linear-gradient(to left, transparent 20%, transparent 100%);
+}
+
+#queue {
+  background: #0e0e0e;
+}
+
+#queue li {
+  background-color: #0F0B0C;
+  border: 1px solid #000;
+  box-shadow: inset 0px 0px 0px 2px rgba(255,255,255,0.03);
+  color:white;
+}
+
+#queue li:hover {
+  background-color: #272727;
+}
+
+.time-popup {
+  background: #2b2b2b;
+  border: 1px solid #444;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+ul h3 {
+  background: #151515 !important;
+  color: white;
+}
+
+#css-editor {
+  font-family: monospace !important;
+}
+
+::-webkit-scrollbar {
+  height: 12px;
+  background-color: #1e1e1e;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #1e1e1e;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #3a3a3a;
+  border-radius: 6px;
+  border: 2px solid #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #4a4a4a;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: #1e1e1e;
+}
+
+/* For Firefox */
+* {
+  scrollbar-color: #3a3a3a #1e1e1e;
+}

@@ -1,22 +1,49 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "soundflare",
+  "version": "2.0.0",
+  "description": "A music player built with Electron.",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
+    "Music",
+    "Player",
+    "Sound",
+    "Mp3",
     "demo"
   ],
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^34.3.0"
+    "@electron-forge/cli": "^7.7.0",
+    "@electron-forge/maker-deb": "^7.8.0",
+    "@electron-forge/maker-rpm": "^7.7.0",
+    "@electron-forge/maker-squirrel": "^7.7.0",
+    "@electron-forge/maker-zip": "^7.7.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.7.0",
+    "@electron-forge/plugin-fuses": "^7.7.0",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^34.3.0",
+    "electron-winstaller": "^5.4.0"
+  },
+  "dependencies": {
+    "discord-rich-presence": "^0.0.8",
+    "discord-rpc": "^4.0.1",
+    "electron-squirrel-startup": "^1.0.1",
+    "jquery": "^3.7.1",
+    "jquery.rsSliderLens": "^1.0.6",
+    "ytdl-core": "^4.11.5"
+  },
+  "build": {
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "",
+        "repo": "your-repo-name"
+      }
+    ]
   }
 }

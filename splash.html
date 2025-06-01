@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Splash</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;             /* Prevent mouse events */
+      user-select: none;                /* Prevent text/image selection */
+      -webkit-user-select: none;        /* Prevent selection (WebKit) */
+      -webkit-app-region: no-drag;      /* Prevent window dragging */
+    }
+
+    img {
+      width: 200px;
+      height: auto;
+      -webkit-user-drag: none;          /* Prevent image drag */
+      pointer-events: none;             /* Block all interaction */
+      -webkit-app-region: no-drag;      /* Ensure no drag zone */
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <img src="./SoundFlareLogo.png" alt="Splash Logo">
+</body>
+</html>
