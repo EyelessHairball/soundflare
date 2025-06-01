@@ -37,32 +37,29 @@ document.addEventListener("DOMContentLoaded", function () {
   const rcssb = document.getElementById("reset-css");
   const ajsb = document.getElementById("apply-js");
   const rjsb = document.getElementById("reset-js");
-  const customStyle = document.createElement("style");
-  const customScript = document.createElement("script");
-  const timePopup = document.querySelector(".time-popup");
-  const currentTimeEl = timePopup.querySelector(".current-time");
-  const remainingTimeEl = timePopup.querySelector(".remaining-time");
-  const playbackModal = document.getElementById("playback-modal");
-  const playbackSettingsBtn = document.getElementById("playback-settings-btn");
-  const playbackSpeed = document.getElementById("playback-speed");
-  const reverseAudio = document.getElementById("reverse-audio");
-  const monoAudio = document.getElementById("mono-audio");
-  const bassBoost = document.getElementById("bass-boost");
-  const volumeNormalization = document.getElementById("volume-normalization");
-  const resetPlayback = document.getElementById("reset-playback");
-  const midBoost = document.getElementById("mid-boost");
-  const trebleBoost = document.getElementById("treble-boost");
-  const toggleMiniplayer = document.getElementById("toggle-miniplayer");
-  const traditionalBarToggle = document.getElementById("traditional-bar-toggle");
-  const controls = document.getElementById("controls");
-  const bottomControls = document.getElementById("bottom-controls");
-  const traditionalControls = document.getElementById("traditional-controls");
-  const tradProgressContainer = document.getElementById("trad-progress-container");
-  const tradProgressBar = document.getElementById("trad-progress-bar");
-  const tradProgressThumb = document.getElementById("trad-progress-thumb");
-  const tradVolumeContainer = document.getElementById("trad-volume-container");
-  const tradVolumeBar = document.getElementById("trad-volume-bar");
-  const tradVolumeThumb = document.getElementById("trad-volume-thumb");
+  const css = document.createElement("style");
+  const csr = document.createElement("script");
+  const tp = document.querySelector(".time-popup");
+  const cte = tp.querySelector(".current-time");
+  const rte = tp.querySelector(".remaining-time");
+  const pbm = document.getElementById("playback-modal");
+  const pbsb = document.getElementById("playback-settings-btn");
+  const pbs = document.getElementById("playback-speed");
+  const rev = document.getElementById("reverse-audio");
+  const mono = document.getElementById("mono-audio");
+  const bb = document.getElementById("bass-boost");
+  const vn = document.getElementById("volume-normalization");
+  const rpb = document.getElementById("reset-playback");
+  const mb = document.getElementById("mid-boost");
+  const tb = document.getElementById("treble-boost");
+  const trb = document.getElementById("traditional-bar-toggle");
+  const trc = document.getElementById("traditional-controls");
+  const trpc = document.getElementById("trad-progress-container");
+  const trpb = document.getElementById("trad-progress-bar");
+  const trpt = document.getElementById("trad-progress-thumb");
+  const trvc = document.getElementById("trad-volume-container");
+  const trvb = document.getElementById("trad-volume-bar");
+  const trvt = document.getElementById("trad-volume-thumb");
 
 
   const audio = new Audio("");
@@ -85,23 +82,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   function setTradProgress(percent) {
-  tradProgressBar.style.width = `${percent * 100}%`;
-  tradProgressThumb.style.left = `${percent * 100}%`;
+  trpb.style.width = `${percent * 100}%`;
+  trpt.style.left = `${percent * 100}%`;
 }
 
 
   let popupTimeout;
-  customScript.id = "custom-js";
-  customStyle.id = "custom-css";
+  csr.id = "custom-js";
+  css.id = "custom-css";
   if (tpref) {
     s.href = tpref;
   } else {
     s.href = "./dark.css";
   }
-  document.head.appendChild(customStyle);
+  document.head.appendChild(css);
   csse.value = store;
   document.getElementById("custom-css").textContent = store;
-  document.head.appendChild(customScript);
+  document.head.appendChild(csr);
   jse.value = storesrc;
   document.getElementById("custom-js").textContent = storesrc;
   function loadError(oError) {
@@ -115,14 +112,14 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.getItem("playbackSettings") || "{}"
     );
 
-    if (playbackSpeed) playbackSpeed.value = settings.speed || 1;
-    if (reverseAudio) reverseAudio.checked = settings.reverse || false;
-    if (monoAudio) monoAudio.checked = settings.mono || false;
-    if (bassBoost) bassBoost.value = settings.bass || 0;
-    if (midBoost) midBoost.value = settings.mid || 0;
-    if (trebleBoost) trebleBoost.value = settings.treble || 0;
-    if (volumeNormalization)
-      volumeNormalization.value = settings.normalization || "none";
+    if (pbs) pbs.value = settings.speed || 1;
+    if (rev) rev.checked = settings.reverse || false;
+    if (mono) mono.checked = settings.mono || false;
+    if (bb) bb.value = settings.bass || 0;
+    if (mb) mb.value = settings.mid || 0;
+    if (tb) tb.value = settings.treble || 0;
+    if (vn)
+      vn.value = settings.normalization || "none";
 
     updateSpeedDisplay();
     updateBassDisplay();
@@ -131,26 +128,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function savePlaybackSettings() {
   const settings = {
-    speed: parseFloat(playbackSpeed.value),
-    mono: monoAudio ? monoAudio.checked : false,
-    bass: bassBoost ? parseInt(bassBoost.value): 0,
-    mid: midBoost ? parseInt(midBoost.value) : 0,
-    treble: trebleBoost ? parseInt(trebleBoost.value) : 0,
-    normalization: volumeNormalization.value,
-    reverse: reverseAudio ? reverseAudio.checked : false
+    speed: parseFloat(pbs.value),
+    mono: mono ? mono.checked : false,
+    bass: bb ? parseInt(bb.value): 0,
+    mid: mb ? parseInt(mb.value) : 0,
+    treble: tb ? parseInt(tb.value) : 0,
+    normalization: vn.value,
+    reverse: rev ? rev.checked : false
   };
 
   localStorage.setItem("playbackSettings", JSON.stringify(settings));
 }
 
-if (traditionalBarToggle && traditionalControls) {
+if (trb && trc) {
   const useTraditional = localStorage.getItem("useTraditionalBar") === "true";
-  traditionalBarToggle.checked = useTraditional;
+  trb.checked = useTraditional;
   setControlBarMode(useTraditional);
 
-  traditionalBarToggle.addEventListener("change", () => {
-    setControlBarMode(traditionalBarToggle.checked);
-    localStorage.setItem("useTraditionalBar", traditionalBarToggle.checked);
+  trb.addEventListener("change", () => {
+    setControlBarMode(trb.checked);
+    localStorage.setItem("useTraditionalBar", trb.checked);
   });
 }
 
@@ -158,16 +155,16 @@ function setControlBarMode(useTraditional) {
   if (useTraditional) {
     if (controls) controls.style.display = "none";
     if (bottomControls) bottomControls.style.display = "none";
-    if (traditionalControls) traditionalControls.style.display = "flex";
+    if (trc) trc.style.display = "flex";
   } else {
     if (controls) controls.style.display = "";
     if (bottomControls) bottomControls.style.display = "";
-    if (traditionalControls) traditionalControls.style.display = "none";
+    if (trc) trc.style.display = "none";
   }
 }
 
-if (tradProgressContainer) {
-  tradProgressContainer.addEventListener("mousedown", (e) => {
+if (trpc) {
+  trpc.addEventListener("mousedown", (e) => {
     tradDragging = true;
     updateTradSlider(e);
   });
@@ -177,11 +174,11 @@ if (tradProgressContainer) {
   window.addEventListener("mouseup", () => {
     tradDragging = false;
   });
-  tradProgressContainer.addEventListener("click", updateTradSlider);
+  trpc.addEventListener("click", updateTradSlider);
 }
 
-if (tradVolumeContainer) {
-  tradVolumeContainer.addEventListener("mousedown", (e) => {
+if (trvc) {
+  trvc.addEventListener("mousedown", (e) => {
     tradVolumeDragging = true;
     updateTradVolumeSlider(e);
   });
@@ -191,20 +188,20 @@ if (tradVolumeContainer) {
   window.addEventListener("mouseup", () => {
     tradVolumeDragging = false;
   });
-  tradVolumeContainer.addEventListener("click", updateTradVolumeSlider);
+  trvc.addEventListener("click", updateTradVolumeSlider);
 }
 
 function setTradVolume(percent) {
   tradVolume = percent;
-  tradVolumeBar.style.width = `${percent * 100}%`;
-  tradVolumeThumb.style.left = `${percent * 100}%`;
+  trvb.style.width = `${percent * 100}%`;
+  trvt.style.left = `${percent * 100}%`;
   if (typeof audio !== "undefined") {
     audio.volume = percent;
   }
 }
 
 function updateTradSlider(e) {
-  const rect = tradProgressContainer.getBoundingClientRect();
+  const rect = trpc.getBoundingClientRect();
   let x = e.touches ? e.touches[0].clientX : e.clientX;
   let percent = (x - rect.left) / rect.width;
   percent = Math.max(0, Math.min(1, percent));
@@ -215,7 +212,7 @@ function updateTradSlider(e) {
 }
 
 function updateTradVolumeSlider(e) {
-  const rect = tradVolumeContainer.getBoundingClientRect();
+  const rect = trvc.getBoundingClientRect();
   let x = e.touches ? e.touches[0].clientX : e.clientX;
   let percent = (x - rect.left) / rect.width;
   percent = Math.max(0, Math.min(1, percent));
@@ -230,7 +227,7 @@ if (typeof audio !== "undefined") {
   });
 }
 
-if (traditionalControls) {
+if (trc) {
   const tp = document.getElementById("trad-play");
   const tv = document.getElementById("trad-prev");
   const tn = document.getElementById("trad-next");
@@ -319,31 +316,31 @@ if (traditionalControls) {
 
 
   function applyAudioSettings() {
-    audio.playbackRate = playbackSpeed.value;
+    audio.playbackRate = pbs.value;
     updatePitch();
-    if (reverseAudio && reverseAudio.checked) {
+    if (rev && rev.checked) {
       audio.playbackRate = Math.abs(audio.playbackRate);
       audio.currentTime = audio.duration - audio.currentTime;
     } else {
       audio.playbackRate = Math.abs(audio.playbackRate);
     }
-    if (monoAudio && monoAudio.checked) {
+    if (mono && mono.checked) {
       audio.setAttribute("crossorigin", "anonymous");
       if (source) source.channelCount = 1;
     } else {
       if (source) source.channelCount = 2;
     }
     if (bassBoostNode && bassBoostNode.gain) {
-      bassBoostNode.gain.value = bassBoost.value;
+      bassBoostNode.gain.value = bb.value;
     }
     if (
-      volumeNormalization &&
-      volumeNormalization.value !== "none" &&
+      vn &&
+      vn.value !== "none" &&
       analyser &&
       dataArray
     ) {
       analyser.getByteTimeDomainData(dataArray);
-      const normalizationType = volumeNormalization.value;
+      const normalizationType = vn.value;
       if (normalizationType === "peak") {
         const maxVolume = Math.max(...dataArray) / 255;
         gainNode.gain.value = maxVolume > 0 ? 1 / maxVolume : 1;
@@ -360,10 +357,10 @@ if (traditionalControls) {
       gainNode.gain.value = 1;
     }
     if (midBoostNode && midBoostNode.gain) {
-      midBoostNode.gain.value = midBoost.value;
+      midBoostNode.gain.value = mb.value;
     }
     if (trebleBoostNode && trebleBoostNode.gain) {
-      trebleBoostNode.gain.value = trebleBoost.value;
+      trebleBoostNode.gain.value = tb.value;
     }
   }
   // dictionary
@@ -416,8 +413,8 @@ if (traditionalControls) {
     trebleBoostNode.frequency.value = 3000;
   }
 
-  playbackSettingsBtn.addEventListener("click", () => {
-    playbackModal.style.display = "block";
+  pbsb.addEventListener("click", () => {
+    pbm.style.display = "block";
     initAudioContext();
   });
 
@@ -464,7 +461,7 @@ if (traditionalControls) {
   });
 
   document.getElementById("close-pb").addEventListener("click", () => {
-    playbackModal.style.display = "none";
+    pbm.style.display = "none";
   });
 
   acssb.addEventListener("click", () => {
@@ -614,7 +611,7 @@ if (pitchBendSlider) {
 
 function updatePitch() {
   const totalSemitones = pitchShift + pitchBend;
-  audio.playbackRate = semitonesToPlaybackRate(totalSemitones) * (parseFloat(playbackSpeed.value) || 1);
+  audio.playbackRate = semitonesToPlaybackRate(totalSemitones) * (parseFloat(pbs.value) || 1);
 }
 
   function playNext() {
@@ -1420,12 +1417,12 @@ function updatePitch() {
       stops[1].setAttribute("stop-color", dominantColors[1]);
     }
 
-    const tradProgressBar = document.getElementById("trad-progress-bar");
-    const tradProgressThumb = document.getElementById("trad-progress-thumb");
-    if (tradProgressBar && tradProgressThumb && dominantColors.length > 0) {
-      tradProgressBar.style.background = dominantColors[0]; 
-      tradProgressThumb.style.borderColor = dominantColors[0];
-      tradProgressThumb.style.boxShadow = `0 0 4px ${dominantColors[0]}`;
+    const trpb = document.getElementById("trad-progress-bar");
+    const trpt = document.getElementById("trad-progress-thumb");
+    if (trpb && trpt && dominantColors.length > 0) {
+      trpb.style.background = dominantColors[0]; 
+      trpt.style.borderColor = dominantColors[0];
+      trpt.style.boxShadow = `0 0 4px ${dominantColors[0]}`;
     }
   }
 
@@ -1700,13 +1697,13 @@ function updatePitch() {
     const currentTime = progress * audio.duration;
     const remainingTime = audio.duration - currentTime;
 
-    currentTimeEl.textContent = formatTime(currentTime);
-    remainingTimeEl.textContent = `-${formatTime(remainingTime)}`;
+    cte.textContent = formatTime(currentTime);
+    rte.textContent = `-${formatTime(remainingTime)}`;
 
-    timePopup.classList.add("show");
+    tp.classList.add("show");
     clearTimeout(popupTimeout);
     popupTimeout = setTimeout(() => {
-      timePopup.classList.remove("show");
+      tp.classList.remove("show");
     }, 1000);
   }
 
@@ -1924,17 +1921,17 @@ function updatePitch() {
   function updateSpeedDisplay() {
     document.getElementById(
       "speed-value"
-    ).textContent = `${playbackSpeed.value}x`;
-    if (playbackSpeed.value == 1) {
+    ).textContent = `${pbs.value}x`;
+    if (pbs.value == 1) {
       document.getElementById("speed-value").textContent = `1.0x`;
     }
-    if (playbackSpeed.value == 2) {
+    if (pbs.value == 2) {
       document.getElementById("speed-value").textContent = `2.0x`;
     }
   }
 
   function updateBassDisplay() {
-    document.getElementById("bass-value").textContent = `${bassBoost.value}dB`;
+    document.getElementById("bass-value").textContent = `${bb.value}dB`;
   }
 
   document.getElementById("close-edit-playlist-modal").onclick = function () {
@@ -1942,13 +1939,13 @@ function updatePitch() {
   };
 
   // Event Listeners
-  playbackSpeed.addEventListener("input", () => {
+  pbs.addEventListener("input", () => {
     updateSpeedDisplay();
     applyAudioSettings();
     savePlaybackSettings();
   });
 
-  //reverseAudio.addEventListener('change', () => {
+  //rev.addEventListener('change', () => {
   // applyAudioSettings();
   // savePlaybackSettings();
   //});
@@ -2009,28 +2006,28 @@ function updatePitch() {
     }
   });
 
-  monoAudio.addEventListener("change", () => {
+  mono.addEventListener("change", () => {
     applyAudioSettings();
     savePlaybackSettings();
   });
 
-  bassBoost.addEventListener("input", () => {
+  bb.addEventListener("input", () => {
     updateBassDisplay();
     applyAudioSettings();
     savePlaybackSettings();
   });
 
   function updateMidDisplay() {
-    document.getElementById("mid-value").textContent = `${midBoost.value}dB`;
+    document.getElementById("mid-value").textContent = `${mb.value}dB`;
   }
 
   function updateTrebleDisplay() {
     document.getElementById(
       "treble-value"
-    ).textContent = `${trebleBoost.value}dB`;
+    ).textContent = `${tb.value}dB`;
   }
 
-  midBoost.addEventListener("input", () => {
+  mb.addEventListener("input", () => {
     updateMidDisplay();
     applyAudioSettings();
     savePlaybackSettings();
@@ -2041,22 +2038,22 @@ function updatePitch() {
     switchModal.style.display = "block";
   });
 
-  trebleBoost.addEventListener("input", () => {
+  tb.addEventListener("input", () => {
     updateTrebleDisplay();
     applyAudioSettings();
     savePlaybackSettings();
   });
 
-  volumeNormalization.addEventListener("change", () => {
+  vn.addEventListener("change", () => {
     savePlaybackSettings();
   });
 
-  resetPlayback.addEventListener("click", () => {
-    playbackSpeed.value = 1;
-    reverseAudio.checked = false;
-    monoAudio.checked = false;
-    bassBoost.value = 0;
-    volumeNormalization.value = "none";
+  rpb.addEventListener("click", () => {
+    pbs.value = 1;
+    rev.checked = false;
+    mono.checked = false;
+    bb.value = 0;
+    vn.value = "none";
     applyAudioSettings();
     savePlaybackSettings();
     updateSpeedDisplay();

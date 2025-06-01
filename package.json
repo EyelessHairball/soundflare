@@ -31,11 +31,8 @@
   },
   "dependencies": {
     "discord-rich-presence": "^0.0.8",
-    "discord-rpc": "^4.0.1",
     "electron-squirrel-startup": "^1.0.1",
-    "jquery": "^3.7.1",
-    "jquery.rsSliderLens": "^1.0.6",
-    "ytdl-core": "^4.11.5"
+    "jquery": "^3.7.1"
   },
   "build": {
     "publish": [

@@ -20,25 +20,7 @@ function createWindows() {
   });
 
   splash.loadFile('splash.html');
-
-  mainWindow = new BrowserWindow({
-    icon: './SoundFlareLogo.png',
-    width: 1500,
-    height: 1000,
-    minWidth: 777, //my lucky number :3
-    minHeight: 700,
-    autoHideMenuBar: false,
-    transparent: false,
-    frame: false,
-    show: false,
-    webPreferences: {
-      nodeIntegration: false,
-      contextIsolation: true,
-      preload: path.join(__dirname, 'preload.js'),
-      devTools: true
-    }
-  });
-
+  app.setAppUserModelId('com.hairlesseyeball.soundflare');
   mainWindow.loadFile('index.html');
 
   mainWindow.once('ready-to-show', () => {
