@@ -7,7 +7,6 @@ SoundFlare is a free and open-source music player built with JS and Electron wit
 
 ## Getting Started
 
-
 ### Prerequisites
 - [Node.js](https://nodejs.org/) 
 - [Git](https://git-scm.com/)
