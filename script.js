@@ -239,6 +239,18 @@ if (trc) {
   const tvo = document.getElementById("trad-volume");
   const tlo = document.getElementById("trad-loop");
   const tub = document.getElementById("trad-upload-btn");
+  function updateQueuePadding() {
+    if (trc.style.display === "flex" || trc.style.display === "") {
+      q.style.paddingBottom = trc.offsetHeight + "px";
+    } else {
+      q.style.paddingBottom = "";
+    }
+  }
+  updateQueuePadding();
+  const trcObserver = new MutationObserver(updateQueuePadding);
+  trcObserver.observe(trc, { attributes: true, attributeFilter: ["style"] });
+  window.addEventListener("resize", updateQueuePadding);
+
   if (tp && play) tp.addEventListener("click", () => play.click());
   if (tv && prev) tv.addEventListener("click", () => prev.click());
   if (tn && next) tn.addEventListener("click", () => next.click());
@@ -253,7 +265,6 @@ if (trc) {
       f.dispatchEvent(event);
     });
   }
-
   if (tct && tdu && typeof audio !== "undefined") {
     function updateTradTimeDisplay() {
       tct.textContent = formatTime(audio.currentTime || 0);
@@ -271,7 +282,6 @@ if (trc) {
     });
     updateTradTimeDisplay();
   }
-
 
   if (tp) {
     play.addEventListener("click", () => {
@@ -310,7 +320,7 @@ if (trc) {
     audio.addEventListener("volumechange", () => {
       tvo.value = audio.volume;
     });
-  }1
+  }
 }
 
 
@@ -1560,10 +1570,36 @@ function updatePitch() {
 
   function drawVisualizer() {
     if (!analyser || !isVisualizerVisible) return;
-
     requestAnimationFrame(drawVisualizer);
-
     analyser.getByteFrequencyData(dataArray);
+    const bassGain = bb ? parseFloat(bb.value) || 0 : 0;
+    const midGain = mb ? parseFloat(mb.value) || 0 : 0;
+    const trebleGain = tb ? parseFloat(tb.value) || 0 : 0;
+    let visArray = new Uint8Array(dataArray);
+    const barCount = 32;
+    const spacing = 2;
+    const totalSpacing = spacing * (barCount - 1);
+    const barWidth = (visualizerCanvas.width - totalSpacing) / barCount;
+    const barHeightStep = 10;
+    const levels = Math.floor(visualizerCanvas.height / barHeightStep);
+    const totalBarWidth = barCount * barWidth + (barCount - 1) * spacing;
+    const offsetX = (visualizerCanvas.width - totalBarWidth) / 2;
+
+
+    for (let i = 0; i < visArray.length; i++) {
+      const freq = (i / visArray.length) * analyser.context.sampleRate / 2;
+      let gain = 0;
+      if (freq < 250) {
+        gain = bassGain;
+      } else if (freq < 2000) {
+        gain = midGain;
+      } else {
+        gain = trebleGain;
+      }
+      const linear = Math.pow(10, gain / 20);
+      visArray[i] = Math.min(255, visArray[i] * linear);
+    }
+
     visualizerCtx.fillStyle = "rgb(0, 0, 0)";
     visualizerCtx.fillRect(
       0,
@@ -1586,24 +1622,15 @@ function updatePitch() {
       "#ff0000"
     ];
 
-    const barCount = 32;
-    const spacing = 2;
-    const totalSpacing = spacing * (barCount - 1);
-    const barWidth = (visualizerCanvas.width - totalSpacing) / barCount;
-    const barHeightStep = 10;
-    const levels = Math.floor(visualizerCanvas.height / barHeightStep);
-    const totalBarWidth = barCount * barWidth + (barCount - 1) * spacing;
-    const offsetX = (visualizerCanvas.width - totalBarWidth) / 2;
-
     for (let i = 0; i < barCount; i++) {
       const logIndex = Math.floor(
-        Math.pow(i / barCount, 2) * (dataArray.length - 1)
+        Math.pow(i / barCount, 2) * (visArray.length - 1)
       );
 
       let sum = 0;
       const avgRange = 2;
       for (let j = 0; j < avgRange; j++) {
-        sum += dataArray[Math.min(logIndex + j, dataArray.length - 1)];
+        sum += visArray[Math.min(logIndex + j, visArray.length - 1)];
       }
       const avg = sum / avgRange;
 
