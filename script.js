@@ -96,11 +96,19 @@ document.addEventListener("DOMContentLoaded", function () {
     s.href = "./dark.css";
   }
   document.head.appendChild(css);
-  csse.value = store;
-  document.getElementById("custom-css").textContent = store;
+  function stripHtmlTags(str) {
+    if (!str) return "";
+    return str.replace(/<[^>]*>/g, "");
+  }
+
+  csse.value = stripHtmlTags(store);
+  document.getElementById("custom-css").textContent = stripHtmlTags(store);
+
   document.head.appendChild(csr);
-  jse.value = storesrc;
-  document.getElementById("custom-js").textContent = storesrc;
+
+  jse.value = stripHtmlTags(storesrc);
+  document.getElementById("custom-js").textContent = stripHtmlTags(storesrc);
+
   function loadError(oError) {
     oError.target.remove();
   }
