@@ -153,12 +153,12 @@ if (trb && trc) {
 
 function setControlBarMode(useTraditional) {
   if (useTraditional) {
-    if (controls) controls.style.display = "none";
-    if (bottomControls) bottomControls.style.display = "none";
+    if (c) c.style.display = "none";
+    if (b) b.style.display = "none";
     if (trc) trc.style.display = "flex";
   } else {
-    if (controls) controls.style.display = "";
-    if (bottomControls) bottomControls.style.display = "";
+    if (c) c.style.display = "";
+    if (b) b.style.display = "";
     if (trc) trc.style.display = "none";
   }
 }
