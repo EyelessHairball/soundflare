@@ -1360,20 +1360,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-  const tu = document.getElementById("titleupdate");
-  if (tu) {
-    const updateTitleElement = () => {
-      tu.innerHTML = document.title;
-    };
-    updateTitleElement();
-    const titleObserver = new MutationObserver(updateTitleElement);
-    const titleEl = document.querySelector("title");
-    if (titleEl) {
-      titleObserver.observe(titleEl, { childList: true });
-    }
-    document.addEventListener("visibilitychange", updateTitleElement);
-  }
-
   f.addEventListener("change", async function (e) {
     const files = e.target.files;
     playlists[currentPlaylistName] = playlist;
@@ -2559,8 +2545,6 @@ stereoSlider.addEventListener("input", () => {
 
   document.getElementById("toggle-visualizer").addEventListener("click", () => {
     toggleVisualizer();
-    const titleBar = document.getElementById("titlebar");
-    if (isVisualizerVisible) {
       navbar.style.backgroundColor = "black";
       document.body.style.overflow = "hidden";
       const settingsIcon = document.querySelector(".settings-button i");
@@ -2572,10 +2556,6 @@ stereoSlider.addEventListener("input", () => {
       }
       if (makePlaylistIcon) {
         makePlaylistIcon.style.setProperty("color", "white", "important");
-      }
-      if (titleBar) {
-        titleBar.style.backgroundColor = "black";
-        titleBar.style.color = "white";
       }
     } else {
       navbar.style.backgroundColor = "";
@@ -2589,10 +2569,6 @@ stereoSlider.addEventListener("input", () => {
       }
       if (makePlaylistIcon) {
         makePlaylistIcon.style.color = "";
-      }
-      if (titleBar) {
-        titleBar.style.backgroundColor = "";
-        titleBar.style.color = "";
       }
     }
   });
