@@ -2560,7 +2560,7 @@ stereoSlider.addEventListener("input", () => {
     if (makePlaylistIcon) {
       makePlaylistIcon.style.setProperty("color", "white", "important");
     }
-  } else {
+  } else { 
     navbar.style.backgroundColor = "";
     document.body.style.overflow = "";
 
