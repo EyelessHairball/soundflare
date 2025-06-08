@@ -2544,34 +2544,38 @@ stereoSlider.addEventListener("input", () => {
   const makePlaylistIcon = document.querySelector("#make-playlist i");
 
   document.getElementById("toggle-visualizer").addEventListener("click", () => {
-    toggleVisualizer();
-      navbar.style.backgroundColor = "black";
-      document.body.style.overflow = "hidden";
-      const settingsIcon = document.querySelector(".settings-button i");
-      if (settingsIcon) {
-        settingsIcon.style.setProperty("color", "white", "important");
-      }
-      if (switchPlaylistIcon) {
-        switchPlaylistIcon.style.setProperty("color", "white", "important");
-      }
-      if (makePlaylistIcon) {
-        makePlaylistIcon.style.setProperty("color", "white", "important");
-      }
-    } else {
-      navbar.style.backgroundColor = "";
-      document.body.style.overflow = "";
-      const settingsIcon = document.querySelector(".settings-button i");
-      if (settingsIcon) {
-        settingsIcon.style.color = "";
-      }
-      if (switchPlaylistIcon) {
-        switchPlaylistIcon.style.color = "";
-      }
-      if (makePlaylistIcon) {
-        makePlaylistIcon.style.color = "";
-      }
+  toggleVisualizer();
+
+  if (isVisualizerVisible) {
+    navbar.style.backgroundColor = "black";
+    document.body.style.overflow = "hidden";
+
+    const settingsIcon = document.querySelector(".settings-button i");
+    if (settingsIcon) {
+      settingsIcon.style.setProperty("color", "white", "important");
     }
-  });
+    if (switchPlaylistIcon) {
+      switchPlaylistIcon.style.setProperty("color", "white", "important");
+    }
+    if (makePlaylistIcon) {
+      makePlaylistIcon.style.setProperty("color", "white", "important");
+    }
+  } else {
+    navbar.style.backgroundColor = "";
+    document.body.style.overflow = "";
+
+    const settingsIcon = document.querySelector(".settings-button i");
+    if (settingsIcon) {
+      settingsIcon.style.color = "";
+    }
+    if (switchPlaylistIcon) {
+      switchPlaylistIcon.style.color = "";
+    }
+    if (makePlaylistIcon) {
+      makePlaylistIcon.style.color = "";
+    }
+  }
+});
 
   window.addEventListener("resize", () => {
     if (isVisualizerVisible) {
