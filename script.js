@@ -135,8 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const visualizers = [
     drawBarVisualizer,
     drawWaveformVisualizer,
-    drawSpectrogramVisualizer,
-    FruityDanceVisualizer
+    drawSpectrogramVisualizer
   ];
 
   function easeInOutQuad(t) {
