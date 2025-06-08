@@ -2724,5 +2724,4 @@ stereoSlider.addEventListener("input", () => {
       }
     });
   }
-}
 });
