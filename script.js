@@ -735,7 +735,7 @@ document.addEventListener("DOMContentLoaded", function () {
   next.addEventListener("click", playNext);
   prev.addEventListener("click", playPrevious);
 
-  if ("mediaSession" in navigator) {
+  if (!isMobile() && "mediaSession" in navigator) {
     navigator.mediaSession.setActionHandler("nexttrack", playNext);
     navigator.mediaSession.setActionHandler("previoustrack", playPrevious);
     navigator.mediaSession.setActionHandler("play", () => {
@@ -1604,7 +1604,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    if ("mediaSession" in navigator) {
+    
+    if (!isMobile() && "mediaSession" in navigator) {
       navigator.mediaSession.metadata = new window.MediaMetadata({
         title: track.name,
         artist: track.artist,
