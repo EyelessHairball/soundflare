@@ -8,12 +8,6 @@
   transition: all 0.2s ease-in-out;
 }
 
-
-body {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-}
-
-
 * {
     -ms-overflow-style: none;
     scrollbar-width: none; 
@@ -24,7 +18,7 @@ body {
 
 
 canvas {
-  padding-top: 60px !important;
+  padding-top: 110px !important;
 }
 
 .titlebar {
@@ -162,7 +156,7 @@ canvas {
 
 .navbar {
   position: fixed;
-  top: 0;
+  top: 50px;
   left: 0;
   right: 0;
   height: 60px;
@@ -206,7 +200,7 @@ canvas {
   padding: 0px;
   position: fixed;
   right: 0;
-  padding-top: 60px;
+  padding-top: 110px;
   top: 0;
   display: flex;
   flex-direction: column;
@@ -420,7 +414,7 @@ canvas {
 
 #queue {
   padding: 0;
-  padding-top: 60px;
+  padding-top: 110px;
   padding-right: 300px;
   margin: 0;
   width: 100%;
