@@ -399,9 +399,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
     <script>
+    window.addEventListener("load", () => {
     setTimeout(() => {
-      document.querySelector('.loader-screen').style.opacity = '0';
+      const loader = document.querySelector('.loader-screen');
+      loader.style.transition = 'opacity 0.5s ease';
+      loader.style.opacity = '0';
+      loader.style.pointerEvents = 'none'; 
+
+      setTimeout(() => {
+        loader.style.display = 'none';
+      }, 1000); 
     }, 3000);
+  });
   </script>
 </body>
 
