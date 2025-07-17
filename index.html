@@ -26,11 +26,6 @@
       z-index: 9999999999999;
     }
 
-    .loader {
-      aspect-ratio: 1;
-      display: grid;
-    }
-
     .loader:before,
     .loader:after {
       content: "";
@@ -405,8 +400,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
     <script>
     setTimeout(() => {
-      document.querySelector('.loader-screen').style.display = 'none';
-      document.querySelector('.main').style.display = 'block';
+      document.querySelector('.loader-screen').style.opacity = '0';
     }, 3000);
   </script>
 </body>
