@@ -19,7 +19,7 @@
     .loader-screen {
       position: fixed;
       inset: 0;
-      background: #222;
+      background: black;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -27,9 +27,6 @@
     }
 
     .loader {
-      --s: 20px;
-      --_d: calc(0.353*var(--s));
-      width: calc(var(--s) + var(--_d));
       aspect-ratio: 1;
       display: grid;
     }
@@ -406,6 +403,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+    <script>
+    setTimeout(() => {
+      document.querySelector('.loader-screen').style.display = 'none';
+      document.querySelector('.main').style.display = 'block';
+    }, 3000);
+  </script>
 </body>
 
 </html>
