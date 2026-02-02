@@ -16,11 +16,6 @@
     display: none;  
 }
 
-
-canvas {
-  padding-top: 110px !important;
-}
-
 .titlebar {
   user-select: none;
   -webkit-app-region: drag;  
